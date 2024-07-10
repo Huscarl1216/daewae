@@ -21,15 +21,22 @@ def get_new_activities():
     return activities
 
 def send_to_discord(activities, webhook_url):
+    headers = {
+        "Content-Type": "application/json"
+    }
+    
     for activity in activities:
         data = {
             "content": f"**이름**: {activity['name']}\n**주최 단체**: {activity['organizer']}\n**바로가기 링크**: {activity['link']}"
         }
-        response = requests.post(webhook_url, data=json.dumps(data), headers={"Content-Type": "application/json"})
+        response = requests.post(webhook_url, data=json.dumps(data), headers=headers)
         if response.status_code != 204:
             print(f"Failed to send message to Discord: {response.status_code}, {response.text}")
 
 if __name__ == "__main__":
     webhook_url = "YOUR_DISCORD_WEBHOOK_URL"
     activities = get_new_activities()
-    send_to_discord(activities, webhook_url)
+    if activities:
+        send_to_discord(activities, webhook_url)
+    else:
+        print("No new activities found.")
