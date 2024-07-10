@@ -34,7 +34,7 @@ def send_to_discord(activities, webhook_url):
             print(f"Failed to send message to Discord: {response.status_code}, {response.text}")
 
 if __name__ == "__main__":
-    webhook_url = "YOUR_DISCORD_WEBHOOK_URL"
+    webhook_url = "https://discordapp.com/api/webhooks/1260556334072332308/Z73BbRnIp2VakZLHf8rXmaXcQD-lp2vsGeRAoLnjrzSfQoPHIqTEAoGlwd7VjbZ8mOOr"
     activities = get_new_activities()
     if activities:
         send_to_discord(activities, webhook_url)
